@@ -1,0 +1,67 @@
+.App {
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+}
+
+.tryparse-buttons {
+  background: lightgray;
+  padding: 10px 5px;
+}
+
+.editors {
+  display: flex;
+}
+
+ul {
+  background: #f9e5bc;
+  list-style: none;
+}
+
+.root-list {
+  padding: 10px;
+}
+
+ul li {
+  padding-left: 40px;
+  color: black !important;
+}
+
+.object {
+  color: green; 
+}
+
+.array {
+  color: red;
+}
+
+.keys {
+  font-weight: 700;
+}
+
+div[class^='JSON'] {
+  width: calc(50vw - 30px);
+  height: 100vh;
+}
+
+.JSON_Editor {
+  background: red;
+}
+
+.JSON_Viewer {
+  background: orange;
+  text-align: left;
+  padding: 0 30px;
+}
+
+#editor {
+  width: 50vw !important;
+  height: 100vh !important;
+}
+
+button {
+  display: block;
+  margin: auto;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid grey;
+}
