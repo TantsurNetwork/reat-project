@@ -65,3 +65,23 @@ button {
   border-radius: 5px;
   border: 1px solid grey;
 }
+
+[class*="-keys"] {
+  transition: all 300ms ease-in-out;
+  cursor: pointer;
+  margin-left: -18px !important;
+}
+
+[class*='-keys']:hover {
+  font-size: 18px;
+  color: red;
+}
+
+.wrapped::before{
+  content: "\21D2 "
+}
+
+.opened::before{
+  content: "\21D3 "
+}
+

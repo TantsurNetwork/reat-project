@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import ViewerElement from './ViewerElement';
-
+import PrimitiveWrapper from './PrimitiveWrapper';
+import ArrayWrapper from './ArrayWrapper';
+import ObjectWrapper from './ObjectWrapper';
 
 
 export default class JsonViewer extends Component {
@@ -10,7 +11,7 @@ export default class JsonViewer extends Component {
 
         this.typeHandlers = {
             primitiveTypeComponent: (value, key) =>
-                <ViewerElement value={value} name={key} />,
+                <PrimitiveWrapper value={value} name={key} />,
         
             objectTypeComponent: (struct, parentKey) => {
                 let result = [];
@@ -20,11 +21,7 @@ export default class JsonViewer extends Component {
                 }
         
                 return (
-                    <ul className={parentKey ? '' : 'root-list'}>
-                        <span className="keys">{parentKey ? `${parentKey}: ` : ''}</span>
-                        {`Object - {${Object.keys(struct).length}}`}
-                        <span>{result}</span>
-                    </ul>
+                    <ObjectWrapper parentKey={parentKey} result={result} length={Object.keys(struct).length}/>
                 )
             },
         
@@ -36,11 +33,7 @@ export default class JsonViewer extends Component {
                 }
         
                 return (
-                    <ul>
-                        <span className="keys">{parentKey ? `${parentKey}: ` : ''}</span>
-                        {`Array - [${struct.length}]`}
-                        <span>{result}</span>
-                    </ul>
+                    <ArrayWrapper parentKey={parentKey} result={result} length={Object.keys(struct).length}/>
                 )
             }
         }

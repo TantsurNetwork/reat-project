@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class ViewerElement extends Component {
+export default class PrimitiveWrapper extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -81,5 +81,3 @@ class ViewerElement extends Component {
         
     }
 }
-
-export default ViewerElement;
