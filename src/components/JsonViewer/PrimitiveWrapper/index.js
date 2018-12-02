@@ -23,22 +23,25 @@ export default class PrimitiveWrapper extends Component {
         })
     }
 
+    
     render() {
+        const {value, name, key} = this.props;
+    
         if (!this.state.editKey && !this.state.editValue) {
             return (
                 <li>
-                    {this.props.name && <span class="keys" onClick={this.onClickKey}>{`${String(this.props.name)}:`} </span>}
+                    {name && <span class="keys" onClick={this.onClickKey}>{`${String(name)}:`} </span>}
                     <span 
                         style={{ 
-                            color: (typeof this.props.value === 'string') ? 'green' : 
-                                        (typeof this.props.value === 'boolean') ? '#FF8C00' : 
-                                        (typeof this.props.value === 'number') ? 'red' :
-                                        (this.props.value === undefined || this.props.value === null) ? 'blue' :
+                            color: (typeof value === 'string') ? 'green' : 
+                                        (typeof value === 'boolean') ? '#FF8C00' : 
+                                        (typeof value === 'number') ? 'red' :
+                                        (value === undefined || value === null) ? 'blue' :
                                         'black'
                         }}
                         onClick={this.onClickValue}
                     >
-                        {String(this.props.value)}
+                        {String(value)}
                     </span>    
                 </li>
             );            
@@ -46,34 +49,34 @@ export default class PrimitiveWrapper extends Component {
         else if (this.state.editKey && this.state.editValue) {
             return (
                 <li>
-                    <input type="key" placeholder={this.props.key}/>
-                    <input type="value" placeholder={this.props.value}/>
+                    <input type="key" placeholder={key}/>
+                    <input type="value" placeholder={value}/>
                 </li>
             );          
         }
         else if (!this.state.editKey && this.state.editValue) {
             return (
                 <li>
-                    {this.props.name && <span style={{ fontWeight: 700 }} onClick={this.onClickKey}>{`${String(this.props.name)}:`} </span>}
-                    <input type="value" placeholder={this.props.value}/>
+                    {name && <span style={{ fontWeight: 700 }} onClick={this.onClickKey}>{`${String(name)}:`} </span>}
+                    <input type="value" placeholder={value}/>
                 </li>
             );
         }
         else {
             return (
                 <li>
-                    <input type="key" ref={input => this.input } placeholder={this.props.key}/>
+                    <input type="key" ref={input => this.input } placeholder={key}/>
                     <span 
                         style={{ 
-                            color: (typeof this.props.value === 'string') ? 'green' : 
-                                        (typeof this.props.value === 'boolean') ? '#FF8C00' : 
-                                        (typeof this.props.value === 'number') ? 'red' :
-                                        (this.props.value === undefined || this.props.value === null) ? 'blue' :
+                            color: (typeof value === 'string') ? 'green' : 
+                                        (typeof value === 'boolean') ? '#FF8C00' : 
+                                        (typeof value === 'number') ? 'red' :
+                                        (value === undefined || value === null) ? 'blue' :
                                         'black'
                         }}
                         onClick={this.onClickValue}
                     >
-                        {String(this.props.value)}
+                        {String(value)}
                     </span>   
                 </li>
             );            

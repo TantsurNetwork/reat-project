@@ -10,14 +10,14 @@ export default class JsonViewer extends Component {
         super(props);
 
         this.typeHandlers = {
-            primitiveTypeComponent: (value, key) =>
-                <PrimitiveWrapper value={value} name={key} />,
+            primitiveTypeComponent: (value, key, nestingLevel) =>
+                <PrimitiveWrapper value={value} name={key} nestingLevel={nestingLevel}/>,
         
-            objectTypeComponent: (struct, parentKey) => {
+            objectTypeComponent: (struct, parentKey, nestingLevel) => {
                 let result = [];
         
                 for (let key in struct) {
-                    result.push(this.typeChecker(struct[key], key))
+                    result.push(this.typeChecker(struct[key], key, nestingLevel + 1))
                 }
         
                 return (
@@ -25,11 +25,11 @@ export default class JsonViewer extends Component {
                 )
             },
         
-            arrayTypeComponent: (struct, parentKey) => {
+            arrayTypeComponent: (struct, parentKey, nestingLevel) => {
                 let result = [];
         
                 for (let key in struct) {
-                    result.push(this.typeChecker(struct[key], key))
+                    result.push(this.typeChecker(struct[key], key, nestingLevel + 1))
                 }
         
                 return (
@@ -39,15 +39,18 @@ export default class JsonViewer extends Component {
         }
     }
 
-    typeChecker(value, key) {
+    typeChecker(value, key, nestingLevel) {
+
+        !nestingLevel && (nestingLevel = 0)
+        alert(nestingLevel)
         if (value instanceof Array) {
-            return this.typeHandlers.arrayTypeComponent(value, key);
+            return this.typeHandlers.arrayTypeComponent(value, key, nestingLevel);
         }
         else if (value instanceof Object) {
-            return this.typeHandlers.objectTypeComponent(value, key);
+            return this.typeHandlers.objectTypeComponent(value, key, nestingLevel);
         }
         else {
-            return this.typeHandlers.primitiveTypeComponent(value, key)
+            return this.typeHandlers.primitiveTypeComponent(value, key, nestingLevel)
         }
     }
 

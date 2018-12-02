@@ -9,22 +9,22 @@ export default class ArrayWrapper extends Component {
     }
 
     rewrap = () => this.setState({
-        wrapped: !this.state.wrapped,
+        wrapped: !this.state.wrapped
     })
 
     render() {
         const { length, parentKey, result } = this.props;
+        const { wrapped } = this.state;
 
         return (
             <ul>
-                <span onClick={this.rewrap} className={`keys array-keys ${this.state.wrapped ? 'wrapped' : 'opened'}`}>
-                    {parentKey ? `${parentKey}: ` : ''}
-                    {` Array - [${length}] `}
+                <span onClick={this.rewrap} className={`keys array-keys ${wrapped ? 'wrapped' : 'opened'}`}>
+                    {`${parentKey}: Array - [${length}] `}
                 </span>
                 {
-                    this.state.wrapped
+                    wrapped
                         ? null
-                        : <span>{this.props.result}</span>
+                        : <span>{result}</span>
                 }
             </ul>
         )

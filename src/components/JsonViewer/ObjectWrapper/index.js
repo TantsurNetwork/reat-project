@@ -14,23 +14,38 @@ export default class ObjectWrapper extends Component {
 
     render() {
         const { length, parentKey, result } = this.props;
+        const { wrapped } = this.state;
 
-        return (
-            <ul className={parentKey ? '' : 'root-list'}>
-                <span 
-                    className={`keys ${parentKey ? 'object-keys' : ''} ${this.state.wrapped && parentKey ? 'wrapped' : 'opened'}`} 
-                    onClick={this.rewrap}
-                >
-                        {parentKey ? `${parentKey}: ` : ''} 
-                        {` Object - {${length}} `}
-                </span>
-                {
-                    this.state.wrapped && parentKey
-                        ? null
-                        : this.props.result
-                }
-            </ul>
-        )
+        if (parentKey) {
+            return (
+                <ul>
+                    <span
+                        className={`keys object-keys ${wrapped ? 'wrapped' : 'opened'}`}
+                        onClick={this.rewrap}
+                    >
+                        {`${parentKey}: Object - {${length}} `}
+                    </span>
+                    {
+                        wrapped
+                            ? null
+                            : result
+                    }
+                </ul>
+            )
+        }
+        else {
+            return (
+                <ul className={'root-list'}>
+                    <span
+                        className="keys"
+                        onClick={this.rewrap}
+                    >
+                        {`Object - {${length}} `}
+                    </span>
+                    {result}
+                </ul>
+            )
+        }
     }
 
 }
